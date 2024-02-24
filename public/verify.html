@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(212, 200, 200);
+            font-family: "Abel", sans-serif;
+        }
+
+        .pageContent {
+            background-color: whitesmoke;
+            background-color: rgb(255, 109, 56);
+            width: 50%;
+            margin-left: 25%;
+            padding: 1rem;
+            height: 70vh;
+            border-radius: 7px;
+            margin-top: 1%;
+            color: white;
+        }
+
+        .pageContent p {
+            text-align: center;
+            font-size: 1.5rem;
+            color: black;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .pageContent button {
+            border: none;
+            width: 40%;
+            height: 2.5rem;
+            margin-top: 3rem;
+            font-size: 1.05rem;
+            border-radius: 10px;
+            font-family: "Abel", sans-serif;
+            margin-left: 30%;
+            font-weight: 500;
+        }
+
+        #sucMsg {
+            width: 40%;
+            background-color: orangered;
+            text-align: center;
+            height: 2.5rem;
+            border-radius: 6px;
+            padding-top: 8px;
+            font-size: 1rem;
+            margin-left: 30%;
+            margin-top: 1.5rem;
+            display: none;
+            color: whitedefined;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <div class="pageContent">
+            <p>Welcome to Tender Music please verify your Email address and complete the registration process. Click on
+                the "Send verification link" and a verification link will be sent to your Emaill address.</p>
+            <div id="sucMsg"><i>Email sent successfully!!!</i></div>
+            <button onclick="sendVerify()">Send verification link</button>
+        </div>
+    </section>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDIpdXgMUm9V13jvxXcZZRxHO-afHNyj7M",
+            authDomain: "tender-music.firebaseapp.com",
+            projectId: "tender-music",
+            storageBucket: "tender-music.appspot.com",
+            messagingSenderId: "638236677984",
+            appId: "1:638236677984:web:a788fa6913244e8fa3b005"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const sendVerify = () => {
+            sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    document.getElementById('sucMsg').style.display = 'block'
+
+                    setTimeout(() => {
+                        document.getElementById('sucMsg').style.display = 'none'
+                    }, 3000);
+                });
+        }
+
+        window.sendVerify = sendVerify;
+    </script>
+</body>
+
+</html>
