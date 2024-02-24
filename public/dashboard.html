@@ -145,8 +145,24 @@
             font-size: 1.1rem;
         }
         #fileName:focus{
-            border: 2px solid whitesmoke;
+            border: 3px solid rgb(230, 227, 227);
             outline: 2px solid blue;
+        }
+        #addButton:focus{
+            border: 2px solid white;
+            outline: 2px solid blue;
+        }
+        #addButton{
+            width: 40%;
+            border: none;
+            height: 3rem;
+            background-color: rgb(64, 64, 247);
+            color: white;
+            font-family: "Exo 2", sans-serif;
+            font-size: 1rem;
+            margin-left: 30%;
+            margin-top: 1rem;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -176,12 +192,12 @@
                         </svg>
                     </div>
                     <div class="text">
-                        <span>Click to upload image</span>
+                        <span>Click to upload file</span>
                     </div>
                     <input id="file" type="file">
                 </label>
                 <input type="text" placeholder="Enter file name" id="fileName">
-                <div><button>Upload File</button></div>
+                <div><button id="addButton">Upload File</button></div>
             </div>
         </div>
     </div>
