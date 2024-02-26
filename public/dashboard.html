@@ -202,6 +202,10 @@
             padding-top: 1%;
             display: none;
         }
+
+        #uploadFile {
+            display: none;
+        }
     </style>
 </head>
 
@@ -215,7 +219,10 @@
             <button id="logOut" onclick="logOutNow()">Log Out</button>
         </aside>
         <div class="bodySection">
-            <div id="myFile"></div>
+            <div id="myFile">
+                <button onclick="check()">Check</button>
+                <button onclick="check2()">Check 2</button>
+            </div>
             <div id="uploadFile">
                 <div id="errMsg"><i>Space can not empty!</i></div>
                 <label for="file" class="custum-file-upload">
@@ -245,7 +252,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getStorage, ref, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+        import { getStorage, ref, uploadBytesResumable, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDIpdXgMUm9V13jvxXcZZRxHO-afHNyj7M",
@@ -271,16 +278,55 @@
         const upLoadFile = () => {
             let fileName = document.getElementById("fileName").value
             let file = document.getElementById('file').files
-            if (file.length !== 0 || fileName !== "") {
+            if (file.length !== 0 && fileName !== "") {
                 onAuthStateChanged(auth, (user) => {
                     let currentUser = user.uid
                     const storage = getStorage();
-                    const storageRef = ref(storage, `Image/${currentUser}/${fileName}`);
-                    const uploadTask = uploadBytesResumable(storageRef, file[0]);
 
-                    if (uploadTask) {
+                    console.log(file[0].type);
+
+                    if (file[0].type.startsWith("image/")) {
+                        const storageRef = ref(storage, `${currentUser}/Image/${fileName}`);
+                        const uploadTask = uploadBytesResumable(storageRef, file[0]);
+                        if (uploadTask) {
                         sucMsg.style.display = "block"
+
+                        setTimeout(() => {
+                            sucMsg.style.display = "none"
+                        }, 5000);
                     }
+                    }else if (file[0].type.startsWith("video/")) {
+                        const storageRef = ref(storage, `${currentUser}/Video/${fileName}`);
+                        const uploadTask = uploadBytesResumable(storageRef, file[0]);
+                        if (uploadTask) {
+                        sucMsg.style.display = "block"
+
+                        setTimeout(() => {
+                            sucMsg.style.display = "none"
+                        }, 5000);
+                    }
+                    }else if (file[0].type.startsWith("audio/")) {
+                        const storageRef = ref(storage, `${currentUser}/Audio/${fileName}`);
+                        const uploadTask = uploadBytesResumable(storageRef, file[0]);
+                        if (uploadTask) {
+                        sucMsg.style.display = "block"
+
+                        setTimeout(() => {
+                            sucMsg.style.display = "none"
+                        }, 5000);
+                    }
+                    }else {
+                        const storageRef = ref(storage, `${currentUser}/Document/${fileName}`);
+                        const uploadTask = uploadBytesResumable(storageRef, file[0]);
+                        if (uploadTask) {
+                        sucMsg.style.display = "block"
+
+                        setTimeout(() => {
+                            sucMsg.style.display = "none"
+                        }, 5000);
+                    }
+                    }
+                    
                 });
             } else {
                 errMsg.style.display = "block"
@@ -292,6 +338,45 @@
         }
 
         window.upLoadFile = upLoadFile;
+
+        const check = () => {
+            const storage = getStorage();
+            getDownloadURL(ref(storage, 'tender/drive 1].jpg'))
+                .then((url) => {
+                    console.log(url);
+
+                })
+                .catch((error) => {
+                    // Handle any errors
+                });
+        }
+
+        window.check = check;
+
+        const check2 = () => {
+            const storage = getStorage();
+            const listRef = ref(storage, 'Image/O26keO6uRfW3tCPXj76X1dJPxDM2');
+            listAll(listRef)
+                .then((res) => {
+                    res.prefixes.forEach((folderRef) => {
+                        console.log(folderRef);
+                    });
+                    res.items.forEach((itemRef) => {
+                        getDownloadURL(ref(itemRef))
+                            .then((url) => {
+                                console.log(url);
+
+                            })
+                            .catch((error) => {
+                                // Handle any errors
+                            });
+                    });
+                }).catch((error) => {
+                    // Uh-oh, an error occurred!
+                });
+        }
+
+        window.check2 = check2;
 
         // Log out user
 
