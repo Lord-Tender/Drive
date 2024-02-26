@@ -172,6 +172,20 @@
         button {
             cursor: pointer;
         }
+        #sucMsg{
+            width: 40%;
+            height: 2.8rem;
+            background-color: rgb(167, 252, 255);
+            color: blue;
+            font-family: "Exo 2", sans-serif;
+            font-size: 1.1rem;
+            margin-left: 30%;
+            margin-top: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            padding-top: 1%;
+            display: none;
+        }
     </style>
 </head>
 
@@ -206,6 +220,7 @@
                 </label>
                 <input type="text" placeholder="Enter file name" id="fileName">
                 <div><button id="addButton" onclick="upLoadFile()">Upload File</button></div>
+                <div id="sucMsg"><i>Uploaded successful!</i></div>
             </div>
         </div>
     </div>
@@ -247,7 +262,7 @@
                 let currentUser = user.uid
                 const storage = getStorage();
                 const storageRef = ref(storage, `Image/${currentUser}/${fileName}`);
-                const uploadTask = uploadBytesResumable(storageRef, file);
+                const uploadTask = uploadBytesResumable(storageRef, file[0]);
             });
         }
 
