@@ -129,7 +129,7 @@
             display: none;
         }
 
-        #fileName{
+        #fileName {
             width: 40%;
             height: 3.5rem;
             border: none;
@@ -140,19 +140,23 @@
             margin-top: 1rem;
             font-size: 1.1rem;
         }
-        #fileName::placeholder{
+
+        #fileName::placeholder {
             font-family: "Exo 2", sans-serif;
             font-size: 1.1rem;
         }
-        #fileName:focus{
+
+        #fileName:focus {
             border: 3px solid rgb(230, 227, 227);
             outline: 2px solid blue;
         }
-        #addButton:focus{
+
+        #addButton:focus {
             border: 2px solid white;
             outline: 2px solid blue;
         }
-        #addButton{
+
+        #addButton {
             width: 40%;
             border: none;
             height: 3rem;
@@ -164,6 +168,10 @@
             margin-top: 1rem;
             border-radius: 8px;
         }
+
+        button {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -174,7 +182,7 @@
             <p>My drive</p>
             <div onclick="showFile()"><i class="fa-regular fa-file"></i>My files</div>
             <div onclick="showUpload()"><i class="fa-solid fa-arrow-up-from-bracket"></i>Upload File</div>
-            <button id="logOut">Log Out</button>
+            <button id="logOut" onclick="logOutNow()">Log Out</button>
         </aside>
         <div class="bodySection">
             <div id="myFile"></div>
@@ -192,18 +200,74 @@
                         </svg>
                     </div>
                     <div class="text">
-                        <span>Click to upload file</span>
+                        <span id="fileText">Click to upload file</span>
                     </div>
                     <input id="file" type="file">
                 </label>
                 <input type="text" placeholder="Enter file name" id="fileName">
-                <div><button id="addButton">Upload File</button></div>
+                <div><button id="addButton" onclick="upLoadFile()">Upload File</button></div>
             </div>
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getStorage, ref, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDIpdXgMUm9V13jvxXcZZRxHO-afHNyj7M",
+            authDomain: "tender-music.firebaseapp.com",
+            projectId: "tender-music",
+            storageBucket: "tender-music.appspot.com",
+            messagingSenderId: "638236677984",
+            appId: "1:638236677984:web:a788fa6913244e8fa3b005"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Change Input label to file name
+
+        file.addEventListener("change", (event) => {
+            let file = document.getElementById('file').files
+            document.getElementById('fileText').innerHTML = `${file[0].name}`
+        });
+
+        // Upload file 
+
+        const upLoadFile = () => {
+            let fileName = document.getElementById("fileName").value
+            let file = document.getElementById('file').files
+            if (file.length !== 0) {
+                document.getElementById('fileText').innerHTML = `${file[0].name}`
+            }
+
+            onAuthStateChanged(auth, (user) => {
+                let currentUser = user.uid
+                const storage = getStorage();
+                const storageRef = ref(storage, `Image/${currentUser}/${fileName}`);
+                const uploadTask = uploadBytesResumable(storageRef, file);
+            });
+        }
+
+        window.upLoadFile = upLoadFile;
+
+        // Log out user
+
+        const logOutNow = () => {
+            signOut(auth).then(() => {
+                // Sign-out successful.
+            }).catch((error) => {
+                // An error happened.
+            });
+        }
+
+        window.logOutNow = logOutNow
+    </script>
     <script src="https://kit.fontawesome.com/7c37944b19.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
+
 </body>
 
 </html>
