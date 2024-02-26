@@ -257,7 +257,7 @@
                     .then((userCredential) => {
                         const user = userCredential.user;
                         if (user) {
-                            window.location.href = 'verify.html'
+                            window.location.href = 'signin.html'
                         }
                     })
                     .catch((error) => {
@@ -276,7 +276,7 @@
                 .then((result) => {
                     const user = result.user;
                     if (user) {
-                        window.location.href = 'music.html'
+                        window.location.href = 'dashboard.html'
                     }
                 }).catch((error) => {
                     // Handle Errors here.
