@@ -80,20 +80,7 @@
     </section>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, sendEmailVerification, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDIpdXgMUm9V13jvxXcZZRxHO-afHNyj7M",
-            authDomain: "tender-music.firebaseapp.com",
-            projectId: "tender-music",
-            storageBucket: "tender-music.appspot.com",
-            messagingSenderId: "638236677984",
-            appId: "1:638236677984:web:a788fa6913244e8fa3b005"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+        
 
         onAuthStateChanged(auth, (user) => {
             if (user.emailVerified == true) {
