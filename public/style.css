@@ -1,0 +1,279 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Exo 2", sans-serif;
+    background-color: whitesmoke;
+}
+
+.mainSection {
+    display: flex;
+}
+
+aside {
+    background-color: white;
+    width: 15%;
+    height: 100vh;
+    padding-top: 20px;
+    position: relative;
+}
+
+aside div {
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-left: 0.7rem;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+aside div:hover {
+    background-color: whitesmoke;
+}
+
+aside p {
+    color: blue;
+    margin-bottom: 1rem;
+    margin-left: 0.7rem;
+}
+
+aside div i {
+    font-size: 1.8rem;
+    color: blue;
+    margin-right: 15px;
+    width: 20px;
+}
+
+aside :nth-child(3) {
+    margin-top: 3rem;
+}
+
+#logOut {
+    border: none;
+    background-color: blue;
+    color: aliceblue;
+    width: 70%;
+    height: 2rem;
+    margin-left: 0.7rem;
+    position: absolute;
+    bottom: 25px;
+}
+
+.bodySection {
+    width: 85%;
+}
+
+input {
+    width: 100%;
+    height: 7rem;
+}
+
+.custum-file-upload {
+    width: 40%;
+    height: 250px;
+    margin-left: 30%;
+    margin-top: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    gap: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed black;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 48px 35px -48px #e8e8e8;
+}
+
+.custum-file-upload .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+    height: 80px;
+    fill: blue;
+}
+
+.custum-file-upload .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custum-file-upload .text span {
+    font-weight: 400;
+    color: black;
+}
+
+.custum-file-upload input {
+    display: none;
+}
+
+#fileName {
+    width: 40%;
+    height: 3.5rem;
+    border: none;
+    border-radius: 7px;
+    background-color: white;
+    padding-left: 0.7rem;
+    margin-left: 30%;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+#fileName::placeholder {
+    font-family: "Exo 2", sans-serif;
+    font-size: 1.1rem;
+}
+
+#fileName:focus {
+    border: 3px solid rgb(230, 227, 227);
+    outline: 2px solid blue;
+}
+
+#addButton:focus {
+    border: 2px solid white;
+    outline: 2px solid blue;
+}
+
+#addButton {
+    width: 40%;
+    border: none;
+    height: 3rem;
+    background-color: rgb(64, 64, 247);
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-size: 1rem;
+    margin-left: 30%;
+    margin-top: 1rem;
+    border-radius: 8px;
+}
+
+button {
+    cursor: pointer;
+}
+
+#sucMsg {
+    width: 40%;
+    height: 2.8rem;
+    background-color: rgb(167, 252, 255);
+    color: blue;
+    font-family: "Exo 2", sans-serif;
+    font-size: 1.1rem;
+    margin-left: 30%;
+    margin-top: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    padding-top: 1%;
+    display: none;
+}
+
+#errMsg {
+    width: 40%;
+    height: 2.8rem;
+    background-color: rgb(250, 34, 34);
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-size: 1.3rem;
+    margin-left: 30%;
+    margin-top: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    padding-top: 1%;
+    display: none;
+}
+
+#uploadFile {
+    display: none;
+}
+
+#image {
+    margin: 1rem;
+}
+
+#image h1 {
+    font-weight: 500;
+    text-align: center;
+}
+
+#image h2 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+#video {
+    margin: 1rem;
+}
+
+#video h1 {
+    font-weight: 500;
+    text-align: center;
+}
+
+#video h2 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+#audio {
+    margin: 1rem;
+}
+
+#audio h1 {
+    font-weight: 500;
+    text-align: center;
+}
+
+#audio h2 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.images {
+    width: 250px;
+}
+
+#verifyEmail {
+    background-color: rgba(0, 0, 0, 0.712);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.verifyEmail {
+    background-color: #e8e8e8;
+    width: 55%;
+    height: 17rem;
+    border-radius: 8px;
+    margin-top: 3%;
+    margin-left: 22.5%;
+}
+
+.verifyEmail p {
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 0.5rem;
+    padding-top: 1rem;
+}
+
+.verifyEmail button {
+    width: 40%;
+    border: none;
+    height: 2.8rem;
+    background-color: rgb(64, 64, 247);
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-size: 1rem;
+    margin-left: 30%;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
