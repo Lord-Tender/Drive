@@ -64,7 +64,7 @@
     <div id="verifyEmail">
         <div class="verifyEmail">
             <p>Your Email address is not verify yet, to continue using this app please verify your Email.</p>
-            <div><a href="verify.html"><button>Verify Now</button></a></div>
+            <div><a href="verify.html" target="_blank"><button>Verify Now</button></a></div>
         </div>
     </div>
 
@@ -86,7 +86,6 @@
         const auth = getAuth(app);
 
         onAuthStateChanged(auth, (user) => {
-            console.log(user.emailVerified);
             if (user.emailVerified == false) {
                 document.getElementById('verifyEmail').style.display  = "block"
                 document.querySelector('body').style.overflow = 'hidden'
@@ -99,7 +98,6 @@
         const storage = getStorage();
         onAuthStateChanged(auth, (user) => {
             let userUid = user.uid
-            console.log(userUid);
             const listRef = ref(storage, `${userUid}/Image/`);
             listAll(listRef)
                 .then((res) => {

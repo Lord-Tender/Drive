@@ -81,7 +81,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, sendEmailVerification, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDIpdXgMUm9V13jvxXcZZRxHO-afHNyj7M",
@@ -94,6 +94,13 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user.emailVerified == true) {
+                window.location.href = 'dashboard.html'
+            }
+
+        })
 
         const sendVerify = () => {
             sendEmailVerification(auth.currentUser)
