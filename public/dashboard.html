@@ -249,8 +249,45 @@
             margin-bottom: 0.5rem;
         }
 
-        .images{
+        .images {
             width: 250px;
+        }
+
+        #verifyEmail {
+            background-color: rgba(0, 0, 0, 0.712);
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .verifyEmail {
+            background-color: #e8e8e8;
+            width: 55%;
+            height: 17rem;
+            border-radius: 8px;
+            margin-top: 3%;
+            margin-left: 22.5%;
+        }
+
+        .verifyEmail p {
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 0.5rem;
+            padding-top: 1rem;
+        }
+
+        .verifyEmail button {
+            width: 40%;
+            border: none;
+            height: 2.8rem;
+            background-color: rgb(64, 64, 247);
+            color: white;
+            font-family: "Exo 2", sans-serif;
+            font-size: 1rem;
+            margin-left: 30%;
+            border-radius: 8px;
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -304,6 +341,12 @@
             </div>
         </div>
     </div>
+    <div id="verifyEmail">
+        <div class="verifyEmail">
+            <p>Your Email address is not verify yet, to continue using this app please verify your Email.</p>
+            <div><a href="verify.html"><button>Verify Now</button></a></div>
+        </div>
+    </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -322,10 +365,49 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        onAuthStateChanged(auth, (user)=>{
+        onAuthStateChanged(auth, (user) => {
+            console.log(user.emailVerified);
+            if (user.emailVerified == false) {
+                document.getElementById('verifyEmail').style.display  = "block"
+                document.querySelector('body').style.overflow = 'hidden'
+            }else{
+                document.getElementById('verifyEmail').style.display  = "none"
+            }
+
+        })
+
+        const storage = getStorage();
+        onAuthStateChanged(auth, (user) => {
+            let userUid = user.uid
+            console.log(userUid);
+            const listRef = ref(storage, `${userUid}/Image/`);
+            listAll(listRef)
+                .then((res) => {
+                    res.prefixes.forEach((folderRef) => {
+                        console.log(folderRef);
+                    });
+                    res.items.forEach((itemRef) => {
+                        if (res.items.length > 0) {
+                            getDownloadURL(ref(itemRef))
+                                .then((url) => {
+                                    document.querySelector("#image h1").style.display = 'none'
+                                    let imgDiv = document.getElementById('image')
+                                    imgDiv.innerHTML += `<img src="${url}" alt="" class="images"/>`
+                                })
+                                .catch((error) => {
+                                    // Handle any errors
+                                });
+                        }
+                    });
+                }).catch((error) => {
+                    // Uh-oh, an error occurred!
+                });
+        })
+
+        onAuthStateChanged(auth, (user) => {
             if (user) {
                 // console.log("I am here");
-            }else{
+            } else {
                 window.location.href = 'signin.html'
             }
         })
@@ -424,36 +506,7 @@
 
         window.check = check;
 
-        // const check2 = () => {
-        const storage = getStorage();
-        onAuthStateChanged(auth, (user) => {
-            let userUid = user.uid
-            console.log(userUid);
-            const listRef = ref(storage, `${userUid}/Image/`);
-            listAll(listRef)
-                .then((res) => {
-                    res.prefixes.forEach((folderRef) => {
-                        console.log(folderRef);
-                    });
-                    res.items.forEach((itemRef) => {
-                        if (res.items.length > 0) {
-                            getDownloadURL(ref(itemRef))
-                                .then((url) => {
-                                    document.querySelector("#image h1").style.display = 'none'
-                                    let imgDiv = document.getElementById('image')
-                                    imgDiv.innerHTML += `<img src="${url}" alt="" class="images"/>`
-                                })
-                                .catch((error) => {
-                                    // Handle any errors
-                                });
-                        }
-                    });
-                }).catch((error) => {
-                    // Uh-oh, an error occurred!
-                });
-        })
 
-        // window.check2 = check2;
 
         // Log out user
 
