@@ -197,11 +197,11 @@
                     <input type="text" id="email" placeholder="Email Address">
                     <label for="" class="lab">Password:</label>
                     <input type="password" id="password" placeholder="Password">
-                    <p>Forgotten password? <span onclick="reset()"><a href="passwordreset.html" class="reset">reset password</a></span>
+                    <p>Forgotten password? <span><a href="passwordreset.html" class="reset">reset password</a></span>
                     </p>
                     <button onclick="signUser()">Login</button>
                     <hr>
-                    <div class="google-login-button">
+                    <div class="google-login-button" onclick="signInG()">
                         <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" x="0px" y="0px"
                             class="google-icon" viewBox="0 0 48 48" height="1em" width="1em"
                             xmlns="http://www.w3.org/2000/svg">
@@ -237,7 +237,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDIpdXgMUm9V13jvxXcZZRxHO-afHNyj7M",
@@ -250,6 +250,7 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
 
         const signUser = () => {
             let email = document.getElementById("email").value
@@ -277,7 +278,22 @@
 
         window.signUser = signUser
 
+        const signInG = () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    if (user) {
+                        window.location.href = 'dashboard.html'
+                    }
+                }).catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    const email = error.customData.email;
+                });
+        }
 
+        window.signInG = signInG
     </script>
 </body>
 

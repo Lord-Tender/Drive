@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getStorage, ref, uploadBytesResumable, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -27,19 +27,23 @@ onAuthStateChanged(auth, (user) => {
 const storage = getStorage();
 onAuthStateChanged(auth, (user) => {
     let userUid = user.uid
+    console.log(userUid);
     const listRef = ref(storage, `${userUid}/Image/`);
     listAll(listRef)
         .then((res) => {
             res.prefixes.forEach((folderRef) => {
                 console.log(folderRef);
             });
-            res.items.forEach((itemRef) => {
+            res.items.forEach((itemRef, index) => {
+                showFileHere.innerHTML += `
+                    <p>${index+1}. ${itemRef.name}</p>
+                `
                 if (res.items.length > 0) {
                     getDownloadURL(ref(itemRef))
                         .then((url) => {
                             document.querySelector("#image h1").style.display = 'none'
                             let imgDiv = document.getElementById('image')
-                            imgDiv.innerHTML += `<img src="${url}" alt="" class="images"/>`
+                            // imgDiv.innerHTML += `<img src="${url}" alt="" class="images"/>`
                         })
                         .catch((error) => {
                             // Handle any errors
@@ -61,7 +65,7 @@ onAuthStateChanged(auth, (user) => {
 
 // Change Input label to file name
 
-file.addEventListener("change", (event) => {
+file.addEventListener("change", () => {
     let file = document.getElementById('file').files
     document.getElementById('fileText').innerHTML = `${file[0].name}`
 });
@@ -159,7 +163,7 @@ window.check = check;
 
 const logOutNow = () => {
     signOut(auth).then(() => {
-        // Sign-out successful.
+        window.location.href = 'signin.html'
     }).catch((error) => {
         // An error happened.
     });

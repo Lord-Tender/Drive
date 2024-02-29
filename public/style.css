@@ -279,6 +279,17 @@ button {
     margin-top: 1rem;
 }
 
+#showFileHere{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 2rem 5rem;
+}
+
+#showFileHere p{
+    font-size: 1.7rem;
+    font-weight: light;
+}
+
 @media screen and ( max-width: 478px) {
     .verifyEmail p {
         font-size: 0.8rem;
