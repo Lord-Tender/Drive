@@ -171,6 +171,8 @@ const logOutNow = () => {
 
 window.logOutNow = logOutNow
 
+// Switching from My files and Upload File section
+
 const showFile = () => {
     document.getElementById('myFile').style.display = 'block'
     document.getElementById('uploadFile').style.display = 'none'
@@ -184,3 +186,9 @@ const showUpload = () => {
 }
 
 window.showUpload = showUpload
+
+// Show file modal cancel button
+
+closeBtn.addEventListener('click', ()=>{
+    alert("what")
+})

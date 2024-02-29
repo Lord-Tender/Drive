@@ -281,13 +281,102 @@ button {
 
 #showFileHere{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: 2rem 5rem;
 }
 
 #showFileHere p{
     font-size: 1.7rem;
     font-weight: light;
+}
+
+#showExactFile {
+    background-color: rgba(0, 0, 0, 0.308);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    /* display: none; */
+}
+
+.showExactFile {
+    background-color: white;
+    width: 40%;
+    height: 85%;
+    border-radius: 3px;
+    margin-top: 2%;
+    margin-left: 30%;
+    padding: 0.8rem;
+    position: relative;
+}
+
+#closeBtn{
+    font-size: 2rem;
+    width: 5%;
+    margin-left: 95%;
+    margin-bottom: 10px;
+    font-weight: lighter;
+}
+
+#exactFile{
+    height: 40%;
+    overflow-y: scroll;
+    padding: 0.5rem;
+    border: 2px blue solid;
+    border-radius: 7px;
+    margin: 0 1.7rem;
+}
+
+#exactFile img{
+    width: 100%;
+}
+
+#showExactFileName{
+    font-weight: 500;
+}
+
+#showExactFile h3{
+    margin-top: 1rem;
+}
+
+#buttons{
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+}
+
+#buttons :nth-child(1) {
+    background-color: orangered;
+    color: white;
+    border: none;
+    width: 25%;
+    height: 2rem;
+    border-radius: 5px;
+    font-size: 0.98rem;
+    font-weight: 500;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+#buttons :nth-child(2) {
+    background-color: blue;
+    color: white;
+    border: none;
+    width: 25%;
+    height: 2rem;
+    border-radius: 5px;
+    font-size: 0.98rem;
+    font-weight: 500;
+    margin-right: 5%;
+}
+#buttons :nth-child(3) {
+    background-color: green;
+    color: white;
+    border: none;
+    width: 25%;
+    height: 2rem;
+    border-radius: 5px;
+    font-size: 0.98rem;
+    font-weight: 500;
 }
 
 @media screen and ( max-width: 478px) {
