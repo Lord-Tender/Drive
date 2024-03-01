@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getStorage, ref, uploadBytesResumable, listAll, getDownloadURL, getMetadata } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+import { getStorage, ref, uploadBytesResumable, listAll, getDownloadURL, getMetadata, deleteObject, updateMetadata } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDIpdXgMUm9V13jvxXcZZRxHO-afHNyj7M",
@@ -56,51 +56,57 @@ onAuthStateChanged(auth, (user) => {
 
 // Show the exact file whether it img or whatever
 
+let toDelete = ""
+let toEdit = ""
+let contentTypeH = ""
+let toUrl = ""
+
 const showMyFile = (item) => {
     showExactFile.style.display = 'block'
-    
+
+    toDelete = item
+    toEdit = item
     getDownloadURL(ref(storage, item))
-    .then((url) => {
-        const forestRef = ref(storage, `${url}`);
-        getMetadata(forestRef)
-            .then((metadata) => {
-                console.log(metadata);
-                if (metadata.contentType.startsWith("image/")) {
-                    console.log(url);
-                    exactFile.innerHTML = `<img src="${url}" alt=""/>`
-                }else if (metadata.contentType.startsWith("video/")) {
-                    console.log(url);
-                    exactFile.innerHTML = `<video src="${url}" controls ></video>`
-                }
-                showExactFileName.innerHTML = `${metadata.name}`
-                let size = metadata.size
-                const kiloSize = (size / 1024).toFixed(2)
-                const megaByte = (kiloSize / 1024).toFixed(2)
-                const gByte = (megaByte / 1024).toFixed(1)
-                if (size >= 1024 && size <= 1048576) {
-                    showExactSize.innerHTML = `${kiloSize}KB`
-                } else if (size >= 1048576 && size <= 1073741824) {
-                    showExactSize.innerHTML = `${megaByte}MB`
-                }else if (size >= 1073741824) {
-                    showExactSize.innerHTML = `${gByte}GB`
-                }
-                const userTimeZone = {timeZone: "Africa/Lagos"}
+        .then((url) => {
+            toUrl = url
+            const forestRef = ref(storage, `${url}`);
+            getMetadata(forestRef)
+                .then((metadata) => {
+                    contentTypeH = metadata.contentType
+                    if (metadata.contentType.startsWith("image/")) {
+                        exactFile.innerHTML = `<img src="${url}" alt=""/>`
+                    } else if (metadata.contentType.startsWith("video/")) {
+                        exactFile.innerHTML = `<video src="${url}" controls ></video>`
+                    }
+                    showExactFileName.innerHTML = `${metadata.name}`
+                    let size = metadata.size
+                    const kiloSize = (size / 1024).toFixed(2)
+                    const megaByte = (kiloSize / 1024).toFixed(2)
+                    const gByte = (megaByte / 1024).toFixed(1)
+                    if (size >= 1024 && size <= 1048576) {
+                        showExactSize.innerHTML = `${kiloSize}KB`
+                    } else if (size >= 1048576 && size <= 1073741824) {
+                        showExactSize.innerHTML = `${megaByte}MB`
+                    } else if (size >= 1073741824) {
+                        showExactSize.innerHTML = `${gByte}GB`
+                    }
+                    const userTimeZone = { timeZone: "Africa/Lagos" }
 
-                // Get time created in User Time Zone
+                    // Get time created in User Time Zone
 
-                let timeCreated = metadata.timeCreated
-                const date = new Date(timeCreated)
-                let timeCreatedConvert = date.toLocaleString('en-US', userTimeZone)
-                showExactTime.innerHTML = timeCreatedConvert
+                    let timeCreated = metadata.timeCreated
+                    const date = new Date(timeCreated)
+                    let timeCreatedConvert = date.toLocaleString('en-US', userTimeZone)
+                    showExactTime.innerHTML = timeCreatedConvert
 
-                // Get time created in User Time Zone
+                    // Get time created in User Time Zone
 
-                let timeUpdated = metadata.updated
-                const date2 = new Date(timeUpdated)
-                let timeUpdatedConvert = date2.toLocaleString('en-US', userTimeZone)
-                showExactUpdated.innerHTML = timeUpdatedConvert
-                
-            })
+                    let timeUpdated = metadata.updated
+                    const date2 = new Date(timeUpdated)
+                    let timeUpdatedConvert = date2.toLocaleString('en-US', userTimeZone)
+                    showExactUpdated.innerHTML = timeUpdatedConvert
+
+                })
         })
         .catch((error) => {
         });
@@ -109,6 +115,66 @@ const showMyFile = (item) => {
 
 window.showMyFile = showMyFile
 
+// Download file
+const downloadFile = () => {
+    console.log(toUrl);
+    getDownloadURL(ref(storage, `${toUrl}`))
+        .then((url) => {
+            // `url` is the download URL for 'images/stars.jpg'
+
+            // This can be downloaded directly:
+            const xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = (event) => {
+                const blob = xhr.response;
+            };
+            xhr.open('GET', url);
+            xhr.send();
+
+            // Or inserted into an <img> element
+            const img = document.getElementById('myimg');
+            img.setAttribute('src', url);
+        })
+        .catch((error) => {
+            // Handle any errors
+        });
+}
+
+window.downloadFile = downloadFile
+
+
+// Delete file
+
+const deleteFile = () => {
+    const desertRef = ref(storage, `${toDelete}`);
+    deleteObject(desertRef).then(() => {
+        alert("Deleted")
+    }).catch((error) => {
+        // Uh-oh, an error occurred!
+    });
+}
+
+
+window.deleteFile = deleteFile
+
+// Edit file name
+
+const editName = () => {
+    const forestRef = ref(storage, `${toEdit}`);
+    let newFilename = "Tender"
+
+    forestRef.updateMetadata({ name: newFilename })
+        .then((metadata) => {
+            // Metadata updated successfully
+            console.log('Filename updated successfully:', metadata);
+        })
+        .catch((error) => {
+            // An error occurred while updating metadata
+            console.error('Error updating filename:', error);
+        });
+}
+
+window.editName = editName
 
 onAuthStateChanged(auth, (user) => {
     if (!user) {
@@ -191,25 +257,6 @@ const upLoadFile = () => {
 }
 
 window.upLoadFile = upLoadFile;
-
-const check = () => {
-    const storage = getStorage();
-    const listRef = ref(storage, 'O26keO6uRfW3tCPXj76X1dJPxDM2/Image');
-    listAll(listRef)
-        .then((res) => {
-            res.prefixes.forEach((folderRef) => {
-                console.log(folderRef);
-            });
-            res.items.forEach((itemRef) => {
-            });
-            console.log(res);
-        }).catch((error) => {
-            // Uh-oh, an error occurred!
-        });
-}
-
-window.check = check;
-
 
 
 // Log out user
