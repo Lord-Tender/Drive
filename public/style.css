@@ -279,13 +279,13 @@ button {
     margin-top: 1rem;
 }
 
-#showFileHere{
+#showFileHere {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: 2rem 5rem;
 }
 
-#showFileHere p{
+#showFileHere p {
     font-size: 1.7rem;
     font-weight: light;
 }
@@ -310,7 +310,7 @@ button {
     position: relative;
 }
 
-#closeBtn{
+#closeBtn {
     font-size: 2rem;
     width: 5%;
     margin-left: 95%;
@@ -318,7 +318,7 @@ button {
     font-weight: lighter;
 }
 
-#exactFile{
+#exactFile {
     height: 40%;
     overflow-y: scroll;
     padding: 0.5rem;
@@ -327,37 +327,39 @@ button {
     margin: 0 1.7rem;
 }
 
-::-webkit-scrollbar {
-    width: 12px; /* Width of the scrollbar */
-  }
-  
-  ::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Color of the scrollbar track */
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Color of the scrollbar thumb */
-  }  
+#exactFile::-webkit-scrollbar {
+    width: 10px;
+}
 
-#exactFile img, #exactFile video{
+#exactFile::-webkit-scrollbar-track {
+    background-color: rgb(236, 232, 232);
+}
+
+#exactFile::-webkit-scrollbar-thumb {
+    background-color: rgb(47, 47, 250);
+    border-radius: 5px;
+}
+
+#exactFile img,
+#exactFile video {
     width: 100%;
 }
 
-#showExactFileName{
+#showExactFileName {
     font-weight: 500;
 }
 
-#showExactFile h3{
+#showExactFile h3 {
     margin-top: 0.7rem;
     font-weight: 500;
     margin-left: 3%;
 }
 
-.showExactFileName1{
+.showExactFileName1 {
     padding-top: 0.8rem;
 }
 
-#buttons{
+#buttons {
     position: absolute;
     bottom: 2rem;
     width: 100%;
@@ -375,6 +377,7 @@ button {
     margin-right: 5%;
     margin-left: 5%;
 }
+
 #buttons :nth-child(2) {
     background-color: blue;
     color: white;
@@ -386,6 +389,7 @@ button {
     font-weight: 500;
     margin-right: 5%;
 }
+
 #buttons :nth-child(3) {
     background-color: green;
     color: white;
@@ -397,15 +401,17 @@ button {
     font-weight: 500;
 }
 
-@media screen and ( max-width: 478px) {
+@media screen and (max-width: 478px) {
     .verifyEmail p {
         font-size: 0.8rem;
-    }   
-    .verifyEmail button{
+    }
+
+    .verifyEmail button {
         width: 50%;
         font-size: 1rem;
     }
-    .verifyEmail{
+
+    .verifyEmail {
         width: 70%;
         margin-left: 15%;
         margin-top: 15%;
