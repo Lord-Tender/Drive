@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getStorage, ref, uploadBytesResumable, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+import { getStorage, ref, uploadBytesResumable, listAll, getDownloadURL, getMetadata } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDIpdXgMUm9V13jvxXcZZRxHO-afHNyj7M",
@@ -35,9 +35,16 @@ onAuthStateChanged(auth, (user) => {
                 console.log(folderRef);
             });
             res.items.forEach((itemRef, index) => {
+                getDownloadURL(ref(itemRef))
+                    .then((url) => {
+                        console.log(url)
+                    })
+                    .catch((error) => {
+                    });
                 if (res.items.length > 0) {
+                    document.querySelector("#image h1").style.display = 'none'
                     showFileHere.innerHTML += `
-                        <p onclick="showMyFile(${index})">${index + 1}. ${itemRef.name}</p>
+                        <p onclick="showMyFile('${itemRef}')">${index + 1}. ${itemRef.name}</p>
                     `
                 }
             });
@@ -51,9 +58,19 @@ onAuthStateChanged(auth, (user) => {
 
 const showMyFile = (item) => {
     showExactFile.style.display = 'block'
-    getDownloadURL(ref(item))
-        .then((url) => {
-            console.log(url)
+    
+    getDownloadURL(ref(storage, item))
+    .then((url) => {
+        const forestRef = ref(storage, `${url}`);
+        getMetadata(forestRef)
+            .then((metadata) => {
+                console.log(metadata);
+                if (metadata.contentType.startsWith("image/")) {
+                    console.log(url);
+                    exactFile.innerHTML = `<img src="${url}" alt=""/>`
+                    showExactFileName.innerHTML = `${metadata.name}`
+                }
+            })
         })
         .catch((error) => {
         });
