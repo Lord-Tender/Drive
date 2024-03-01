@@ -68,8 +68,38 @@ const showMyFile = (item) => {
                 if (metadata.contentType.startsWith("image/")) {
                     console.log(url);
                     exactFile.innerHTML = `<img src="${url}" alt=""/>`
-                    showExactFileName.innerHTML = `${metadata.name}`
+                }else if (metadata.contentType.startsWith("video/")) {
+                    console.log(url);
+                    exactFile.innerHTML = `<video src="${url}" controls ></video>`
                 }
+                showExactFileName.innerHTML = `${metadata.name}`
+                let size = metadata.size
+                const kiloSize = (size / 1024).toFixed(2)
+                const megaByte = (kiloSize / 1024).toFixed(2)
+                const gByte = (megaByte / 1024).toFixed(1)
+                if (size >= 1024 && size <= 1048576) {
+                    showExactSize.innerHTML = `${kiloSize}KB`
+                } else if (size >= 1048576 && size <= 1073741824) {
+                    showExactSize.innerHTML = `${megaByte}MB`
+                }else if (size >= 1073741824) {
+                    showExactSize.innerHTML = `${gByte}GB`
+                }
+                const userTimeZone = {timeZone: "Africa/Lagos"}
+
+                // Get time created in User Time Zone
+
+                let timeCreated = metadata.timeCreated
+                const date = new Date(timeCreated)
+                let timeCreatedConvert = date.toLocaleString('en-US', userTimeZone)
+                showExactTime.innerHTML = timeCreatedConvert
+
+                // Get time created in User Time Zone
+
+                let timeUpdated = metadata.updated
+                const date2 = new Date(timeUpdated)
+                let timeUpdatedConvert = date2.toLocaleString('en-US', userTimeZone)
+                showExactUpdated.innerHTML = timeUpdatedConvert
+                
             })
         })
         .catch((error) => {

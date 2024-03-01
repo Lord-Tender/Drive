@@ -322,12 +322,24 @@ button {
     height: 40%;
     overflow-y: scroll;
     padding: 0.5rem;
-    border: 2px blue solid;
+    border: 3px whitesmoke solid;
     border-radius: 7px;
     margin: 0 1.7rem;
 }
 
-#exactFile img{
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color of the scrollbar track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color of the scrollbar thumb */
+  }  
+
+#exactFile img, #exactFile video{
     width: 100%;
 }
 
@@ -336,12 +348,18 @@ button {
 }
 
 #showExactFile h3{
-    margin-top: 1rem;
+    margin-top: 0.7rem;
+    font-weight: 500;
+    margin-left: 3%;
+}
+
+.showExactFileName1{
+    padding-top: 0.8rem;
 }
 
 #buttons{
     position: absolute;
-    bottom: 15px;
+    bottom: 2rem;
     width: 100%;
 }
 
