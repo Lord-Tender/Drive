@@ -16,10 +16,10 @@ const auth = getAuth(app);
 
 onAuthStateChanged(auth, (user) => {
     if (user.emailVerified == false) {
-        document.getElementById('verifyEmail').style.display  = "block"
+        document.getElementById('verifyEmail').style.display = "block"
         document.querySelector('body').style.overflow = 'hidden'
-    }else{
-        document.getElementById('verifyEmail').style.display  = "none"
+    } else {
+        document.getElementById('verifyEmail').style.display = "none"
     }
 
 })
@@ -35,30 +35,36 @@ onAuthStateChanged(auth, (user) => {
                 console.log(folderRef);
             });
             res.items.forEach((itemRef, index) => {
-                showFileHere.innerHTML += `
-                    <p>${index+1}. ${itemRef.name}</p>
-                `
                 if (res.items.length > 0) {
-                    getDownloadURL(ref(itemRef))
-                        .then((url) => {
-                            document.querySelector("#image h1").style.display = 'none'
-                            let imgDiv = document.getElementById('image')
-                            // imgDiv.innerHTML += `<img src="${url}" alt="" class="images"/>`
-                        })
-                        .catch((error) => {
-                            // Handle any errors
-                        });
+                    showFileHere.innerHTML += `
+                        <p onclick="showMyFile(${index})">${index + 1}. ${itemRef.name}</p>
+                    `
                 }
             });
         }).catch((error) => {
-            // Uh-oh, an error occurred!
+
         });
 })
 
+
+// Show the exact file whether it img or whatever
+
+const showMyFile = (item) => {
+    showExactFile.style.display = 'block'
+    getDownloadURL(ref(item))
+        .then((url) => {
+            console.log(url)
+        })
+        .catch((error) => {
+        });
+
+}
+
+window.showMyFile = showMyFile
+
+
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // console.log("I am here");
-    } else {
+    if (!user) {
         window.location.href = 'signin.html'
     }
 })
@@ -189,6 +195,6 @@ window.showUpload = showUpload
 
 // Show file modal cancel button
 
-closeBtn.addEventListener('click', ()=>{
-    alert("what")
+closeBtn.addEventListener('click', () => {
+    showExactFile.style.display = 'none'
 })
