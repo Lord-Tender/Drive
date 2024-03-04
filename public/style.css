@@ -365,7 +365,7 @@ button {
     width: 100%;
 }
 
-#buttons :nth-child(1) {
+#buttons > :nth-child(1) {
     background-color: orangered;
     color: white;
     border: none;
@@ -378,7 +378,7 @@ button {
     margin-left: 5%;
 }
 
-#buttons :nth-child(2) {
+#buttons > :nth-child(2) {
     background-color: blue;
     color: white;
     border: none;
@@ -390,7 +390,7 @@ button {
     margin-right: 5%;
 }
 
-#buttons :nth-child(3) {
+#buttons :nth-child(3) button{
     background-color: green;
     color: white;
     border: none;
@@ -401,6 +401,15 @@ button {
     font-weight: 500;
 }
 
+.mainSection aside section{
+    position: fixed; 
+    top: 5px; 
+    height: 100%;
+}
+
+.header{
+    display: none;
+}
 @media screen and (max-width: 478px) {
     .verifyEmail p {
         font-size: 0.8rem;
@@ -415,5 +424,42 @@ button {
         width: 70%;
         margin-left: 15%;
         margin-top: 15%;
+    }
+    .header{
+        display: flex;
+        background-color: rgba(71, 71, 252, 0.849);
+        padding: 1.2rem 0;
+    }
+    .mainSection aside section{
+        top: 13%;
+    }
+    aside{
+        position: absolute;
+        width: 75%;
+        display: none;
+    }
+    #icon{
+        font-size: 2rem;
+        margin-left: 2rem;
+        color: white;
+    }
+    #DisTougler{
+        display: none;
+        font-size: 2.3rem;
+    }
+    .header p {
+        font-size: 1.6rem;
+        margin-left: 23%;
+        color: aliceblue;
+    }
+    #showFileHere{
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        margin: 1rem 2rem;
+    }
+    #showFileHere p {
+        font-size: 1.5rem;
+        font-weight: light;
     }
 }

@@ -58,7 +58,6 @@ onAuthStateChanged(auth, (user) => {
 
 let toDelete = ""
 let toEdit = ""
-let contentTypeH = ""
 let toUrl = ""
 
 const showMyFile = (item) => {
@@ -72,7 +71,6 @@ const showMyFile = (item) => {
             const forestRef = ref(storage, `${url}`);
             getMetadata(forestRef)
                 .then((metadata) => {
-                    contentTypeH = metadata.contentType
                     if (metadata.contentType.startsWith("image/")) {
                         exactFile.innerHTML = `<img src="${url}" alt=""/>`
                     } else if (metadata.contentType.startsWith("video/")) {
@@ -114,33 +112,6 @@ const showMyFile = (item) => {
 }
 
 window.showMyFile = showMyFile
-
-// Download file
-const downloadFile = () => {
-    console.log(toUrl);
-    getDownloadURL(ref(storage, `${toUrl}`))
-        .then((url) => {
-            // `url` is the download URL for 'images/stars.jpg'
-
-            // This can be downloaded directly:
-            const xhr = new XMLHttpRequest();
-            xhr.responseType = 'blob';
-            xhr.onload = (event) => {
-                const blob = xhr.response;
-            };
-            xhr.open('GET', url);
-            xhr.send();
-
-            // Or inserted into an <img> element
-            const img = document.getElementById('myimg');
-            img.setAttribute('src', url);
-        })
-        .catch((error) => {
-            // Handle any errors
-        });
-}
-
-window.downloadFile = downloadFile
 
 
 // Delete file
@@ -292,3 +263,36 @@ window.showUpload = showUpload
 closeBtn.addEventListener('click', () => {
     showExactFile.style.display = 'none'
 })
+
+let sidebar = ""
+
+tougler.addEventListener('click', ()=>{
+    tougler.style.display = "none"
+    DisTougler.style.display = 'block'
+    sidebar = document.querySelector('aside').style.display = 'block'
+    document.querySelector('body').style.overflow = 'hidden'
+})
+
+if (document.querySelector('aside').style.width == 75) {
+    alert("what?")
+}
+
+DisTougler.addEventListener('click', ()=>{
+    DisTougler.style.display = 'none'
+    tougler.style.display = "block"
+    document.querySelector('aside').style.display = 'none'
+    document.querySelector('body').style.overflow = 'scroll'
+})
+
+if (window.getComputedStyle(aside).getPropertyValue('display') === 'block') {
+window.addEventListener('click', function(event) {
+    var aside = document.querySelector('aside');
+    var targetElement = event.target;
+  
+    // Check if the aside is displayed (its display property is 'block')
+      // Check if the clicked element is not the aside element or its descendant
+      if (targetElement !== aside && !aside.contains(targetElement)) {
+        aside.style.display = 'non';
+      }
+  });
+}
