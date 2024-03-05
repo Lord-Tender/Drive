@@ -43,6 +43,8 @@ onAuthStateChanged(auth, (user) => {
                     });
                 if (res.items.length > 0) {
                     document.querySelector("#image h1").style.display = 'none'
+                    document.querySelector("#audio h1").style.display = 'none'
+                    document.querySelector("#video h1").style.display = 'none'
                     showFileHere.innerHTML += `
                         <p onclick="showMyFile('${itemRef}')">${index + 1}. ${itemRef.name}</p>
                     `
@@ -247,6 +249,9 @@ window.logOutNow = logOutNow
 const showFile = () => {
     document.getElementById('myFile').style.display = 'block'
     document.getElementById('uploadFile').style.display = 'none'
+    document.querySelector('aside').style.display = 'none'
+    tougler.style.display = "block"
+    DisTougler.style.display = 'none'
 }
 
 window.showFile = showFile
@@ -254,6 +259,9 @@ window.showFile = showFile
 const showUpload = () => {
     document.getElementById('uploadFile').style.display = 'block'
     document.getElementById('myFile').style.display = 'none'
+    document.querySelector('aside').style.display = 'none'
+    tougler.style.display = "block"
+    DisTougler.style.display = 'none'
 }
 
 window.showUpload = showUpload
@@ -284,15 +292,3 @@ DisTougler.addEventListener('click', ()=>{
     document.querySelector('body').style.overflow = 'scroll'
 })
 
-if (window.getComputedStyle(aside).getPropertyValue('display') === 'block') {
-window.addEventListener('click', function(event) {
-    var aside = document.querySelector('aside');
-    var targetElement = event.target;
-  
-    // Check if the aside is displayed (its display property is 'block')
-      // Check if the clicked element is not the aside element or its descendant
-      if (targetElement !== aside && !aside.contains(targetElement)) {
-        aside.style.display = 'non';
-      }
-  });
-}

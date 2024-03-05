@@ -290,6 +290,28 @@ button {
     font-weight: light;
 }
 
+#showFileHere2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: 2rem 5rem;
+}
+
+#showFileHere2 p {
+    font-size: 1.7rem;
+    font-weight: light;
+}
+
+#showFileHere3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: 2rem 5rem;
+}
+
+#showFileHere3 p {
+    font-size: 1.7rem;
+    font-weight: light;
+}
+
 #showExactFile {
     background-color: rgba(0, 0, 0, 0.308);
     position: absolute;
@@ -461,5 +483,45 @@ button {
     #showFileHere p {
         font-size: 1.5rem;
         font-weight: light;
+    }
+    #showFileHere2{
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        margin: 1rem 2rem;
+    }
+    #showFileHere2 p {
+        font-size: 1.5rem;
+        font-weight: light;
+    }
+    #showFileHere3{
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        margin: 1rem 2rem;
+    }
+    #showFileHere3 p {
+        font-size: 1.5rem;
+        font-weight: light;
+    }
+    #showExactFile {
+        width: 100%;
+        height: 100vh;
+        display: none;
+    }
+    
+    .showExactFile {
+        width: 90%;
+        margin-top: 4%;
+        margin-left: 5%;
+    }
+    #closeBtn{
+        margin-left: 90%;
+        margin-top: 0;
+    }
+    #showExactFile h3 {
+        margin-top: 0.7rem;
+        margin-left: 3%;
+        font-size: 1rem;
     }
 }
