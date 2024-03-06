@@ -85,16 +85,28 @@
     <div id="showExactFile">
         <div class="showExactFile">
             <div id="closeBtn"><i class="fa-solid fa-xmark"></i></div>
-            <div id="exactFile"></div>
-            <h3 class="showExactFileName1">File name: <span id="showExactFileName"></span></h3>
+            <div id="exactFile">
+                <div class="spinner">
+                    <div></div>   
+                    <div></div>    
+                    <div></div>    
+                    <div></div>    
+                    <div></div>    
+                    <div></div>    
+                    <div></div>    
+                    <div></div>    
+                    <div></div>    
+                    <div></div>    
+                  </div>
+            </div>
+            <h3 class="showExactFileName1">File name: <span id="showExactFileName" ></span></h3>
             <h3>Size: <span id="showExactSize"></span></h3>
             <h3>Updated: <span id="showExactUpdated"></span></h3>
             <h3>Time created: <span id="showExactTime"></span></h3>
             <div id="buttons">
                 <button onclick="deleteFile()">Delete</button>
                 <button onclick="editName()">Edit name</button>
-                <img src="https://firebasestorage.googleapis.com/v0/b/tender-music.appspot.com/o/2uZdULYdTcROmGw1HSZ1uYL0rfz2%2FImage%2Ffyugyuf?alt=media&token=7d75946a-0914-4e67-ab7e-119b321cf964" alt="" width="50">
-                <a href="https://firebasestorage.googleapis.com/v0/b/tender-music.appspot.com/o/2uZdULYdTcROmGw1HSZ1uYL0rfz2%2FImage%2Ffyugyuf?alt=media&token=7d75946a-0914-4e67-ab7e-119b321cf964" download>Download</a>
+                <button onclick="editName()">Download</button>
             </div>
         </div>
     </div>

@@ -70,6 +70,7 @@ const showMyFile = (item) => {
     getDownloadURL(ref(storage, item))
         .then((url) => {
             toUrl = url
+
             const forestRef = ref(storage, `${url}`);
             getMetadata(forestRef)
                 .then((metadata) => {
@@ -249,9 +250,11 @@ window.logOutNow = logOutNow
 const showFile = () => {
     document.getElementById('myFile').style.display = 'block'
     document.getElementById('uploadFile').style.display = 'none'
-    document.querySelector('aside').style.display = 'none'
     tougler.style.display = "block"
     DisTougler.style.display = 'none'
+    if (window.innerWidth <= 480) {
+        document.querySelector('aside').style.display = 'none'
+    }
 }
 
 window.showFile = showFile
@@ -259,9 +262,11 @@ window.showFile = showFile
 const showUpload = () => {
     document.getElementById('uploadFile').style.display = 'block'
     document.getElementById('myFile').style.display = 'none'
-    document.querySelector('aside').style.display = 'none'
     tougler.style.display = "block"
     DisTougler.style.display = 'none'
+    if (window.innerWidth <= 480) {
+        document.querySelector('aside').style.display = 'none'
+    }
 }
 
 window.showUpload = showUpload
@@ -274,7 +279,7 @@ closeBtn.addEventListener('click', () => {
 
 let sidebar = ""
 
-tougler.addEventListener('click', ()=>{
+tougler.addEventListener('click', () => {
     tougler.style.display = "none"
     DisTougler.style.display = 'block'
     sidebar = document.querySelector('aside').style.display = 'block'
@@ -285,7 +290,7 @@ if (document.querySelector('aside').style.width == 75) {
     alert("what?")
 }
 
-DisTougler.addEventListener('click', ()=>{
+DisTougler.addEventListener('click', () => {
     DisTougler.style.display = 'none'
     tougler.style.display = "block"
     document.querySelector('aside').style.display = 'none'

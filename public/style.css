@@ -283,6 +283,7 @@ button {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: 2rem 5rem;
+    
 }
 
 #showFileHere p {
@@ -387,51 +388,140 @@ button {
     width: 100%;
 }
 
-#buttons > :nth-child(1) {
+#buttons> :nth-child(1) {
     background-color: orangered;
     color: white;
     border: none;
     width: 25%;
     height: 2rem;
     border-radius: 5px;
-    font-size: 0.98rem;
+    font-size: 0.9rem;
     font-weight: 500;
     margin-right: 5%;
     margin-left: 5%;
 }
 
-#buttons > :nth-child(2) {
+#buttons> :nth-child(2) {
     background-color: blue;
     color: white;
     border: none;
     width: 25%;
     height: 2rem;
     border-radius: 5px;
-    font-size: 0.98rem;
+    font-size: 0.9rem;
     font-weight: 500;
     margin-right: 5%;
 }
 
-#buttons :nth-child(3) button{
+#buttons :nth-child(3) {
     background-color: green;
     color: white;
     border: none;
     width: 25%;
     height: 2rem;
     border-radius: 5px;
-    font-size: 0.98rem;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
-.mainSection aside section{
-    position: fixed; 
-    top: 5px; 
+.mainSection aside section {
+    position: fixed;
+    top: 5px;
     height: 100%;
 }
 
-.header{
+.header {
     display: none;
 }
+
+.spinner {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top: 50%;
+    left: 50%;
+    z-index: 10000;
+  }
+  
+  .spinner div {
+    position: absolute;
+    width: 50%;
+    height: 150%;
+    background: blue;
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+    animation: spinner-fzua35 1s calc(var(--delay) * 1s) infinite ease;
+  }
+  
+  .spinner div:nth-child(1) {
+    --delay: 0.1;
+    --rotation: 36;
+    --translation: 150;
+  }
+  
+  .spinner div:nth-child(2) {
+    --delay: 0.2;
+    --rotation: 72;
+    --translation: 150;
+  }
+  
+  .spinner div:nth-child(3) {
+    --delay: 0.3;
+    --rotation: 108;
+    --translation: 150;
+  }
+  
+  .spinner div:nth-child(4) {
+    --delay: 0.4;
+    --rotation: 144;
+    --translation: 150;
+  }
+  
+  .spinner div:nth-child(5) {
+    --delay: 0.5;
+    --rotation: 180;
+    --translation: 150;
+  }
+  
+  .spinner div:nth-child(6) {
+    --delay: 0.6;
+    --rotation: 216;
+    --translation: 150;
+  }
+  
+  .spinner div:nth-child(7) {
+    --delay: 0.7;
+    --rotation: 252;
+    --translation: 150;
+  }
+  
+  .spinner div:nth-child(8) {
+    --delay: 0.8;
+    --rotation: 288;
+    --translation: 150;
+  }
+  
+  .spinner div:nth-child(9) {
+    --delay: 0.9;
+    --rotation: 324;
+    --translation: 150;
+  }
+  
+  .spinner div:nth-child(10) {
+    --delay: 1;
+    --rotation: 360;
+    --translation: 150;
+  }
+  
+  @keyframes spinner-fzua35 {
+    0%, 10%, 20%, 30%, 50%, 60%, 70%, 80%, 90%, 100% {
+      transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+    }
+  
+    50% {
+      transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1.5%));
+    }
+  }
+
 @media screen and (max-width: 478px) {
     .verifyEmail p {
         font-size: 0.8rem;
@@ -447,81 +537,116 @@ button {
         margin-left: 15%;
         margin-top: 15%;
     }
-    .header{
+
+    .header {
         display: flex;
         background-color: rgba(71, 71, 252, 0.849);
         padding: 1.2rem 0;
     }
-    .mainSection aside section{
+
+    .mainSection aside section {
         top: 13%;
     }
-    aside{
+
+    aside {
         position: absolute;
         width: 75%;
         display: none;
     }
-    #icon{
+
+    #icon {
         font-size: 2rem;
         margin-left: 2rem;
         color: white;
     }
-    #DisTougler{
+
+    #DisTougler {
         display: none;
         font-size: 2.3rem;
     }
+
     .header p {
         font-size: 1.6rem;
         margin-left: 23%;
         color: aliceblue;
     }
-    #showFileHere{
+
+    #showFileHere {
         display: flex;
         flex-direction: column;
         margin: 0;
         margin: 1rem 2rem;
     }
+
     #showFileHere p {
         font-size: 1.5rem;
         font-weight: light;
     }
-    #showFileHere2{
+
+    #showFileHere2 {
         display: flex;
         flex-direction: column;
         margin: 0;
         margin: 1rem 2rem;
     }
+
     #showFileHere2 p {
         font-size: 1.5rem;
         font-weight: light;
     }
-    #showFileHere3{
+
+    #showFileHere3 {
         display: flex;
         flex-direction: column;
         margin: 0;
         margin: 1rem 2rem;
     }
+
     #showFileHere3 p {
         font-size: 1.5rem;
         font-weight: light;
     }
+
     #showExactFile {
         width: 100%;
         height: 100vh;
         display: none;
     }
-    
+
     .showExactFile {
         width: 90%;
         margin-top: 4%;
         margin-left: 5%;
     }
-    #closeBtn{
+
+    #closeBtn {
         margin-left: 90%;
         margin-top: 0;
     }
+
     #showExactFile h3 {
         margin-top: 0.7rem;
         margin-left: 3%;
         font-size: 1rem;
+    }
+
+    #buttons> :nth-child(1),
+    #buttons> :nth-child(2),
+    #buttons> :nth-child(3) {
+        font-size: 0.8rem;
+    }
+
+    .custum-file-upload {
+        width: 90%;
+        margin-left: 13%;
+        margin-top: 2.7rem;
+    }
+    #fileName{
+        width: 91%;
+        margin-left: 12%;
+    }
+    #addButton{
+        width: 90%;
+        margin-left: 12.5%;
     }
 }
