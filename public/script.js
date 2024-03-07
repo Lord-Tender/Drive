@@ -50,9 +50,59 @@ onAuthStateChanged(auth, (user) => {
                     `
                 }
             });
-        }).catch((error) => {
+        })
 
-        });
+    // Display video
+
+    const listRefV = ref(storage, `${userUid}/Video/`);
+    listAll(listRefV)
+        .then((res) => {
+            res.prefixes.forEach((folderRef) => {
+                console.log(folderRef);
+            });
+            res.items.forEach((itemRef, index) => {
+                getDownloadURL(ref(itemRef))
+                    .then((url) => {
+                        console.log(url)
+                    })
+                    .catch((error) => {
+                    });
+                if (res.items.length > 0) {
+                    document.querySelector("#image h1").style.display = 'none'
+                    document.querySelector("#audio h1").style.display = 'none'
+                    document.querySelector("#video h1").style.display = 'none'
+                    showFileHere2.innerHTML += `
+                        <p onclick="showMyFile('${itemRef}')">${index + 1}. ${itemRef.name}</p>
+                    `
+                }
+            });
+        })
+    
+    // Display Audio
+
+    const listRefA = ref(storage, `${userUid}/Audio/`);
+    listAll(listRefA)
+        .then((res) => {
+            res.prefixes.forEach((folderRef) => {
+                console.log(folderRef);
+            });
+            res.items.forEach((itemRef, index) => {
+                getDownloadURL(ref(itemRef))
+                    .then((url) => {
+                        console.log(url)
+                    })
+                    .catch((error) => {
+                    });
+                if (res.items.length > 0) {
+                    document.querySelector("#image h1").style.display = 'none'
+                    document.querySelector("#audio h1").style.display = 'none'
+                    document.querySelector("#video h1").style.display = 'none'
+                    showFileHere3.innerHTML += `
+                        <p onclick="showMyFile('${itemRef}')">${index + 1}. ${itemRef.name}</p>
+                    `
+                }
+            });
+        })
 })
 
 
