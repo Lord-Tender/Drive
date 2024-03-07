@@ -121,8 +121,10 @@ const showMyFile = (item) => {
                     if (metadata.contentType.startsWith("image/")) {
                         exactFile.innerHTML = `<img src="${url}" alt=""/>`
                     } else if (metadata.contentType.startsWith("video/")) {
+                        document.getElementById('exactFile').style.overflow = 'hidden'
                         exactFile.innerHTML = `<video src="${url}" controls ></video>`
                     }else if (metadata.contentType.startsWith("audio/")) {
+                        document.getElementById('exactFile').style.overflow = 'hidden'
                         exactFile.innerHTML = `<audio src="${url}" controls ></audio>`
                     }
                     showExactFileName.innerHTML = `${metadata.name}`
@@ -137,7 +139,7 @@ const showMyFile = (item) => {
                     } else if (size >= 1073741824) {
                         showExactSize.innerHTML = `${gByte}GB`
                     }
-                    const userTimeZone = { timeZone: "Africa/Lagos" }
+                    const userTimeZone = { timeZone: "Africa/Lagos"}
 
                     // Get time created in User Time Zone
 

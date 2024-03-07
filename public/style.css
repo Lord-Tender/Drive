@@ -287,7 +287,7 @@ button {
 
 #showFileHere {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     margin: 2rem 5rem;
     
 }
@@ -299,7 +299,7 @@ button {
 
 #showFileHere2 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     margin: 2rem 5rem;
 }
 
@@ -310,7 +310,7 @@ button {
 
 #showFileHere3 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     margin: 2rem 5rem;
 }
 
@@ -372,6 +372,16 @@ button {
 #exactFile img,
 #exactFile video {
     width: 100%;
+}
+
+#exactFile audio {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 15%;
+}
+
+#exactFile video {
+    height: 100%;
 }
 
 #showExactFileName {
