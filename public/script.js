@@ -43,8 +43,6 @@ onAuthStateChanged(auth, (user) => {
                     });
                 if (res.items.length > 0) {
                     document.querySelector("#image h1").style.display = 'none'
-                    document.querySelector("#audio h1").style.display = 'none'
-                    document.querySelector("#video h1").style.display = 'none'
                     showFileHere.innerHTML += `
                         <p onclick="showMyFile('${itemRef}')">${index + 1}. ${itemRef.name}</p>
                     `
@@ -68,8 +66,6 @@ onAuthStateChanged(auth, (user) => {
                     .catch((error) => {
                     });
                 if (res.items.length > 0) {
-                    document.querySelector("#image h1").style.display = 'none'
-                    document.querySelector("#audio h1").style.display = 'none'
                     document.querySelector("#video h1").style.display = 'none'
                     showFileHere2.innerHTML += `
                         <p onclick="showMyFile('${itemRef}')">${index + 1}. ${itemRef.name}</p>
@@ -94,9 +90,7 @@ onAuthStateChanged(auth, (user) => {
                     .catch((error) => {
                     });
                 if (res.items.length > 0) {
-                    document.querySelector("#image h1").style.display = 'none'
                     document.querySelector("#audio h1").style.display = 'none'
-                    document.querySelector("#video h1").style.display = 'none'
                     showFileHere3.innerHTML += `
                         <p onclick="showMyFile('${itemRef}')">${index + 1}. ${itemRef.name}</p>
                     `
@@ -128,6 +122,8 @@ const showMyFile = (item) => {
                         exactFile.innerHTML = `<img src="${url}" alt=""/>`
                     } else if (metadata.contentType.startsWith("video/")) {
                         exactFile.innerHTML = `<video src="${url}" controls ></video>`
+                    }else if (metadata.contentType.startsWith("audio/")) {
+                        exactFile.innerHTML = `<audio src="${url}" controls ></audio>`
                     }
                     showExactFileName.innerHTML = `${metadata.name}`
                     let size = metadata.size

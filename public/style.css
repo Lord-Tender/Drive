@@ -15,7 +15,7 @@ body {
 
 aside {
     background-color: white;
-    width: 15%;
+    width: 17%;
     height: 100vh;
     padding-top: 20px;
     position: relative;
@@ -25,10 +25,12 @@ aside div {
     font-size: 1.2rem;
     margin-top: 0.8rem;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.7rem;
     padding-left: 0.7rem;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
+    width: 100%;
+    padding-right: 5rem;
 }
 
 aside div:hover {
@@ -63,8 +65,12 @@ aside :nth-child(3) {
     bottom: 25px;
 }
 
+#myFile{
+    padding-left: 5%;
+}
+
 .bodySection {
-    width: 85%;
+    width: 83%;
 }
 
 input {
@@ -648,5 +654,8 @@ button {
     #addButton{
         width: 90%;
         margin-left: 12.5%;
+    }
+    #myFile{
+        padding: 0;
     }
 }
